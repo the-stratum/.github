@@ -1,0 +1,15 @@
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: Project Support
+    url: https://github.com/the-stratum/.github/blob/main/SUPPORT.md
+    about: Read our support guide for project questions and troubleshooting.
+
+  - name: Security Vulnerability
+    url: https://github.com/the-stratum/.github/blob/main/SECURITY.md
+    about: Report suspected security vulnerabilities privately using our security policy.
+
+  - name: STRATUM Discord
+    url: https://discord.gg/VhphZQuyhj
+    about: Join the community for general discussions and collaboration.
