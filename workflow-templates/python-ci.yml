@@ -1,0 +1,64 @@
+
+name: Python CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+          # Add this project's dependency installation command.
+          # Examples:
+          # python -m pip install -r requirements.txt
+          # python -m pip install -e ".[dev]"
+
+          python -m pip install pytest
+
+      - name: Check Python syntax
+        run: python -m compileall -q .
+
+      - name: Run tests
+        shell: bash
+        run: |
+          if find . -type f \( \
+            -name 'test_*.py' -o \
+            -name '*_test.py' \
+          \) \
+            -not -path './.git/*' \
+            -not -path './.venv/*' \
+            -print -quit | grep -q .; then
+            python -m pytest -q
+          else
+            echo "No Python test files found. Test execution skipped."
+          fi
