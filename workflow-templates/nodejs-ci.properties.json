@@ -1,0 +1,15 @@
+
+{
+  "name": "Node.js CI (npm)",
+  "description": "Run tests, linting, type checks, and build scripts across supported Node.js versions using npm.",
+  "iconName": "octicon code",
+  "categories": [
+    "JavaScript",
+    "TypeScript",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^package\\.json$",
+    "^package-lock\\.json$"
+  ]
+}
