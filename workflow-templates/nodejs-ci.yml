@@ -1,0 +1,60 @@
+
+name: Node.js CI (npm)
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Node.js checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["24", "26"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Verify npm lockfile
+        run: |
+          if [ ! -f package-lock.json ]; then
+            echo "::error::This template requires package-lock.json at the repository root."
+            echo "Commit your npm lockfile or adapt this workflow for your package manager."
+            exit 1
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test --if-present
+
+      - name: Run lint
+        run: npm run lint --if-present
+
+      - name: Run type checks
+        run: npm run typecheck --if-present
+
+      - name: Build project
+        run: npm run build --if-present
