@@ -1,0 +1,103 @@
+
+name: Feature Request
+description: Propose a new feature or improvement for a STRATUM project.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing an improvement to STRATUM.
+
+        Before submitting, search existing issues and discussions for similar proposals.
+
+        Please describe the problem and intended outcome rather than prescribing an unnecessarily complex implementation.
+
+        Feature requests are reviewed according to project scope, technical feasibility, maintainability, and available resources. Submission does not guarantee implementation.
+
+  - type: input
+    id: project
+    attributes:
+      label: Project or repository
+      description: Identify the STRATUM project this proposal concerns.
+      placeholder: "Example: project-name or repository URL"
+    validations:
+      required: true
+      min_length: 3
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Type of request
+      description: What kind of improvement are you proposing?
+      options:
+        - New functionality
+        - Improvement to existing functionality
+        - Developer experience
+        - User experience or interface
+        - Performance improvement
+        - Accessibility improvement
+        - Documentation improvement
+        - Integration or compatibility
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: What problem, limitation, or unmet need does this proposal address?
+      placeholder: Explain the current situation and why it needs improvement.
+    validations:
+      required: true
+      min_length: 20
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+      description: Describe the functionality or improvement you would like to see.
+      placeholder: Explain your proposed outcome and how it could help.
+    validations:
+      required: true
+      min_length: 20
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use case and expected benefit
+      description: Who would benefit, and how would this change improve their experience?
+      placeholder: Describe a practical scenario where this feature would be useful.
+    validations:
+      required: true
+      min_length: 20
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you considered another approach or workaround?
+      placeholder: Describe alternatives, existing workarounds, or explain why none are suitable.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Include relevant references, examples, mockups, screenshots, or technical considerations.
+      placeholder: Add anything else that may help maintainers evaluate this proposal.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Submission checklist
+      options:
+        - label: I searched existing issues and discussions for similar proposals.
+          required: true
+        - label: I have described the problem and intended benefit clearly.
+          required: true
+        - label: I understand that submission does not guarantee implementation.
+          required: true
