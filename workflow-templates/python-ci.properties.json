@@ -1,0 +1,14 @@
+
+{
+  "name": "Python CI",
+  "description": "Run Python syntax checks and automated tests across supported Python versions.",
+  "iconName": "octicon beaker",
+  "categories": [
+    "Python"
+  ],
+  "filePatterns": [
+    "^pyproject\\.toml$",
+    "^requirements\\.txt$",
+    "^setup\\.py$"
+  ]
+}
