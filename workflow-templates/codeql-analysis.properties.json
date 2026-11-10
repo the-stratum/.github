@@ -1,0 +1,16 @@
+
+{
+  "name": "CodeQL Security Analysis",
+  "description": "Scan Python, JavaScript, TypeScript, and GitHub Actions workflows for security vulnerabilities and coding errors.",
+  "iconName": "octicon shield-check",
+  "categories": [
+    "Security",
+    "Code scanning"
+  ],
+  "filePatterns": [
+    "^package\\.json$",
+    "^requirements\\.txt$",
+    "^pyproject\\.toml$",
+    "^\\.github/workflows/.*\\.ya?ml$"
+  ]
+}
