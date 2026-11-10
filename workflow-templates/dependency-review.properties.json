@@ -1,0 +1,24 @@
+
+{
+  "name": "Dependency Review",
+  "description": "Identify vulnerable dependencies introduced by pull requests.",
+  "iconName": "octicon shield-check",
+  "categories": [
+    "Security",
+    "Dependency management"
+  ],
+  "filePatterns": [
+    "^package\\.json$",
+    "^package-lock\\.json$",
+    "^requirements\\.txt$",
+    "^pyproject\\.toml$",
+    "^Pipfile\\.lock$",
+    "^go\\.mod$",
+    "^go\\.sum$",
+    "^Cargo\\.toml$",
+    "^Cargo\\.lock$",
+    "^pom\\.xml$",
+    "^build\\.gradle(\\.kts)?$",
+    "^Gemfile\\.lock$"
+  ]
+}
