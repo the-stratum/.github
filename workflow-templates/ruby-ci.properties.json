@@ -1,0 +1,18 @@
+
+{
+  "name": "Ruby CI",
+  "description": "Set up Ruby, install dependencies with Bundler, and run project tests.",
+  "iconName": "octicon code",
+  "categories": [
+    "Ruby",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^Gemfile$",
+    "^Gemfile\\.lock$",
+    "^\\.ruby-version$",
+    "^\\.tool-versions$",
+    "^mise\\.toml$",
+    "^Rakefile$"
+  ]
+}
