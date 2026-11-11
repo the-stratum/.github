@@ -1,0 +1,16 @@
+
+{
+  "name": ".NET CI",
+  "description": "Restore dependencies, build projects, and run tests using the configured .NET SDK.",
+  "iconName": "octicon code",
+  "categories": [
+    ".NET",
+    "Testing"
+  ],
+  "filePatterns": [
+    "(^|/)global\\.json$",
+    "\\.sln$",
+    "\\.slnx$",
+    "\\.(cs|fs|vb)proj$"
+  ]
+}
