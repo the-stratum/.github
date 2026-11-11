@@ -1,0 +1,56 @@
+
+name: Ruby CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Ruby checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Verify Ruby project files
+        shell: bash
+        run: |
+          if [ ! -f Gemfile ]; then
+            echo "::error::Gemfile not found at the repository root."
+            exit 1
+          fi
+
+          if [ ! -f Gemfile.lock ]; then
+            echo "::error::Gemfile.lock not found. Commit the lockfile for reproducible CI."
+            exit 1
+          fi
+
+          if [ ! -f .ruby-version ] && \
+             [ ! -f .tool-versions ] && \
+             [ ! -f mise.toml ]; then
+            echo "::error::Add a Ruby version file (.ruby-version, .tool-versions, or mise.toml)."
+            exit 1
+          fi
+
+      - name: Set up Ruby and install dependencies
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Validate dependencies
+        run: bundle check
+
+      - name: Run tests
+        run: bundle exec rake
