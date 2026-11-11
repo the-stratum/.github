@@ -1,0 +1,18 @@
+
+{
+  "name": "Gradle CI",
+  "description": "Build and test Java and Kotlin projects using Gradle and the Gradle Wrapper.",
+  "iconName": "octicon code",
+  "categories": [
+    "Java",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^build\\.gradle(\\.kts)?$",
+    "^settings\\.gradle(\\.kts)?$",
+    "^gradlew$",
+    "^gradle/wrapper/gradle-wrapper\\.properties$",
+    "^gradle/libs\\.versions\\.toml$",
+    "^\\.java-version$"
+  ]
+}
