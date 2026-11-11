@@ -1,0 +1,52 @@
+name: Java Maven CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Java Maven checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Verify Maven project
+        shell: bash
+        run: |
+          if [ ! -f pom.xml ]; then
+            echo "::error::pom.xml not found at the repository root."
+            exit 1
+          fi
+
+      - name: Run Maven verification
+        shell: bash
+        run: |
+          if [ -f ./mvnw ]; then
+            chmod +x ./mvnw
+            ./mvnw --batch-mode --no-transfer-progress verify
+          elif command -v mvn >/dev/null 2>&1; then
+            mvn --batch-mode --no-transfer-progress verify
+          else
+            echo "::error::Maven Wrapper or Maven installation not found."
+            exit 1
+          fi
