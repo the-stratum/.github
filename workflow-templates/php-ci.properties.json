@@ -1,0 +1,17 @@
+
+{
+  "name": "PHP CI",
+  "description": "Validate Composer configuration, audit dependencies, check PHP syntax, and run project tests.",
+  "iconName": "octicon code",
+  "categories": [
+    "PHP",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^composer\\.json$",
+    "^composer\\.lock$",
+    "^\\.php-version$",
+    "^phpunit\\.xml(\\.dist)?$",
+    "^\\.phpunit\\.result\\.cache$"
+  ]
+}
