@@ -1,0 +1,16 @@
+
+{
+  "name": "Rust CI",
+  "description": "Check Rust formatting, run Clippy, execute tests, and build Cargo workspaces.",
+  "iconName": "octicon code",
+  "categories": [
+    "Rust",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^Cargo\\.toml$",
+    "^Cargo\\.lock$",
+    "^rust-toolchain$",
+    "^rust-toolchain\\.toml$"
+  ]
+}
