@@ -1,0 +1,14 @@
+
+{
+  "name": "Go CI",
+  "description": "Run Go dependency verification, static analysis, automated tests, and package builds.",
+  "iconName": "octicon code",
+  "categories": [
+    "Go",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^go\\.mod$",
+    "^go\\.sum$"
+  ]
+}
