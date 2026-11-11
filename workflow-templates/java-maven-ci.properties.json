@@ -1,0 +1,15 @@
+{
+  "name": "Java Maven CI",
+  "description": "Build and verify Java projects using Maven, with Java setup and dependency caching.",
+  "iconName": "octicon code",
+  "categories": [
+    "Java",
+    "Maven",
+    "Testing"
+  ],
+  "filePatterns": [
+    "^pom\\.xml$",
+    "^mvnw$",
+    "^\\.mvn/wrapper/maven-wrapper\\.properties$"
+  ]
+}
