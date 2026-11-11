@@ -1,0 +1,75 @@
+
+name: PHP CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: PHP checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+
+      - name: Verify Composer files
+        shell: bash
+        run: |
+          if [ ! -f composer.json ]; then
+            echo "::error::composer.json not found at the repository root."
+            exit 1
+          fi
+
+          if [ ! -f composer.lock ]; then
+            echo "::error::composer.lock not found. Commit the lock file for reproducible CI."
+            exit 1
+          fi
+
+      - name: Validate Composer configuration
+        run: composer validate --no-check-publish
+
+      - name: Audit dependencies
+        run: composer audit --locked
+        env:
+          COMPOSER_NO_AUDIT: "0"
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Check PHP syntax
+        shell: bash
+        run: |
+          find . -type f -name '*.php' \
+            -not -path './vendor/*' \
+            -not -path './.git/*' \
+            -print0 | xargs -0 -r -n1 php -l
+
+      - name: Run tests
+        shell: bash
+        run: |
+          if php -r '$data = json_decode(file_get_contents("composer.json"), true); exit(isset($data["scripts"]["test"]) ? 0 : 1);'; then
+            composer run-script test --no-interaction
+          elif [ -x vendor/bin/pest ]; then
+            ./vendor/bin/pest
+          elif [ -x vendor/bin/phpunit ]; then
+            ./vendor/bin/phpunit
+          else
+            echo "No recognized test command found. Test execution skipped."
+          fi
