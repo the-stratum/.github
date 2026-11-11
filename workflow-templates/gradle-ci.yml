@@ -1,0 +1,55 @@
+
+name: Gradle CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Gradle build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Java from version file
+        if: hashFiles('.java-version') != ''
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version-file: .java-version
+
+      - name: Set up default Java version
+        if: hashFiles('.java-version') == ''
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Verify Gradle Wrapper
+        shell: bash
+        run: |
+          if [ ! -f ./gradlew ]; then
+            echo "::error::Gradle Wrapper (gradlew) not found at the repository root."
+            exit 1
+          fi
+
+          chmod +x ./gradlew
+
+      - name: Build and test
+        run: ./gradlew build --no-daemon
