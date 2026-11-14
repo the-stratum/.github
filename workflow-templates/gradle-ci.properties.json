@@ -11,8 +11,6 @@
     "^build\\.gradle(\\.kts)?$",
     "^settings\\.gradle(\\.kts)?$",
     "^gradlew$",
-    "^gradle/wrapper/gradle-wrapper\\.properties$",
-    "^gradle/libs\\.versions\\.toml$",
     "^\\.java-version$"
   ]
 }
