@@ -1,0 +1,51 @@
+
+name: C/C++ CMake CI
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: C/C++ build and test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Verify CMake project
+        shell: bash
+        run: |
+          if [ ! -f CMakeLists.txt ]; then
+            echo "::error::CMakeLists.txt not found at the repository root."
+            exit 1
+          fi
+
+      - name: Check build tools
+        run: |
+          cmake --version
+          gcc --version
+          g++ --version
+
+      - name: Configure project
+        run: >
+          cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTING=ON
+
+      - name: Build project
+        run: cmake --build build --parallel 2
+
+      - name: Run tests
+        run: ctest --test-dir build --output-on-failure --no-tests=error
