@@ -1,7 +1,7 @@
 
 {
   "name": "CodeQL Security Analysis",
-  "description": "Scan Python, JavaScript, TypeScript, and GitHub Actions workflows for security vulnerabilities and coding errors.",
+  "description": "Scan supported programming languages and GitHub Actions workflows for security vulnerabilities and coding errors.",
   "iconName": "octicon shield-check",
   "categories": [
     "Security",
@@ -11,6 +11,15 @@
     "^package\\.json$",
     "^requirements\\.txt$",
     "^pyproject\\.toml$",
-    "^\\.github/workflows/.*\\.ya?ml$"
+    "^go\\.mod$",
+    "^Cargo\\.toml$",
+    "^pom\\.xml$",
+    "^build\\.gradle(\\.kts)?$",
+    "^Gemfile$",
+    "^CMakeLists\\.txt$",
+    "^global\\.json$",
+    "^[^/]+\\.slnx?$",
+    "^[^/]+\\.csproj$",
+    "^Package\\.swift$"
   ]
 }
