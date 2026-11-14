@@ -1,16 +1,13 @@
 
 {
   "name": "Docker Build CI",
-  "description": "Validate Dockerfiles and build container images without publishing them to a registry.",
+  "description": "Validate a root-level Dockerfile and build a container image without publishing it to a registry.",
   "iconName": "octicon package",
   "categories": [
     "Docker",
     "Deployment"
   ],
   "filePatterns": [
-    "^Dockerfile$",
-    "^Dockerfile\\..+$",
-    "^docker-compose\\.(yml|yaml)$",
-    "^compose\\.(yml|yaml)$"
+    "^Dockerfile$"
   ]
 }
