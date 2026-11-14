@@ -1,0 +1,19 @@
+
+{
+  "name": "C/C++ CMake CI",
+  "description": "Configure, compile, and test C and C++ projects using CMake and CTest.",
+  "iconName": "octicon code",
+  "categories": [
+    "C++",
+    "CMake",
+    "Testing"
+  ],
+  "filePatterns": [
+    "(^|/)CMakeLists\\.txt$",
+    "^CMakePresets\\.json$",
+    "\\.cmake$",
+    "\\.(c|cc|cpp|cxx|h|hh|hpp|hxx)$",
+    "^\\.clang-format$",
+    "^\\.clang-tidy$"
+  ]
+}
