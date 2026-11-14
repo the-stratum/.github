@@ -1,3 +1,4 @@
+
 {
   "name": "Java Maven CI",
   "description": "Build and verify Java projects using Maven, with Java setup and dependency caching.",
@@ -9,7 +10,6 @@
   ],
   "filePatterns": [
     "^pom\\.xml$",
-    "^mvnw$",
-    "^\\.mvn/wrapper/maven-wrapper\\.properties$"
+    "^mvnw$"
   ]
 }
